@@ -1,0 +1,9 @@
+﻿@model IEnumerable<ScanAndGo.Models.Product>
+@{
+    ViewBag.Title = "AdminIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h2>Choose from below options</h2>
+<h4>@Html.ActionLink("Available Products", "AdminProducts", "Home")</h4>
+<h4>@Html.ActionLink("Recharge Customer Wallet", "RechargeWallet", "Home")</h4>

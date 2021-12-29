@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ScanAndGo.Models.Product>
+@{
+    ViewBag.Title = "Indexes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<h4 style="color:maroon"> Welcome @Session["UserName"].ToString()</h4>
+<div style="position:absolute; right:200px">@Html.ActionLink("Logout", "LogOut", "Account")</div>
+<h2>Products To Buy</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Product @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.categoryId)
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+
+
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Add to Cart", "AddToCart", "Carts", new { @class = "btn btn-warning" })

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "pay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Payment Successfull</h2>
+<br />
+<br />Total Ammount of @ViewBag.paid is Paid for Your Order from Your Wallet.<br />
+Your Remaining Wallet Balance is 
+@Session["Balance"]
+<br />
+<br />
+Thank You @Session["Username"] for Shopping With Us.
+<br />Have A Good Day and
+Please Visit Again..
+
+
+

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "PaymentFiled";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Payment Failed</h2>
+@{double diff = 0; }
+
+<br />
+<br />
+Dear @Session["Username"]
+<br />
+Your Order value Exceeds your Wallet Balance
+<br />
+<br />
+
+
+<table class="table" style="width:300px; align-items:center">
+    <tr>
+
+        <td>
+            Your Order Total is
+        </td>
+        <th>
+            @ViewBag.total
+        </th>
+    </tr>
+
+    <tr>
+
+        <td>
+            Your Wallet Balance is
+
+        </td>
+        <th>
+            @Session["Balance"]
+        </th>
+
+    </tr>
+</table>
+
+Recharge Your Wallet With Ammount @{diff = @ViewBag.total - Convert.ToDouble(@Session["Balance"]);}@diff To Continue Your Shopping Or  @Html.ActionLink("Remove", "ViewCart", "Carts") Some Item from Order To Continue

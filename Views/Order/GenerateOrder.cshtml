@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ScanAndGo.Models.Cart>
+@{
+    ViewBag.Title = "GenerateOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h4 style="color:maroon"> Welcome @Session["UserName"].ToString()</h4>
+<div style="position:absolute; right:200px">@Html.ActionLink("Logout", "LogOut", "Account")</div>
+<h2>Your Order</h2>
+
+<table class="table" style="width:500px; align-items:center; background-color:aliceblue">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Price) / Item
+        </th>
+        <th>
+            Total @Html.DisplayNameFor(model => model.Product.Price)
+        </th>
+
+
+    </tr>
+    @{ double Total = 0; double TotalPrice = 0;}
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Price)
+                @{ Total += (item.Product.Price * item.quantity);}
+            </td>
+            <td>
+                @{ TotalPrice = (item.Product.Price * item.quantity);}@TotalPrice
+            </td>
+
+        </tr>
+    }
+    <tr>
+
+        <th>
+            Total
+        </th>
+        <td>
+        </td>
+        <td>
+        </td>
+        <th>
+            @Total
+        </th>
+
+    </tr>
+</table>
+<p style="text-align :center"><strong>Your Shopable Wallet Balance = @Session["Balance"]</strong></p>
+<p style="text-align :center"><strong>@Html.ActionLink("Pay Via Wallet", "pay", "Order")</strong></p>
+
+<div>
+    Want To Modify Your Order.
+    @Html.ActionLink("Click here", "ViewCart", "Carts")
+
+</div>

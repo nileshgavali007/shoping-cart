@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ScanAndGo.Models.Cart>
+@{
+    ViewBag.Title = "ViewCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+
+<h4 style="color:maroon"> Welcome @Session["UserName"].ToString()</h4>
+<div style="position:absolute; right:200px">@Html.ActionLink("Logout", "LogOut", "Account")</div>
+<h2>Your Cart</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Product @Html.DisplayNameFor(model => model.Product.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Price) / Item
+        </th>
+        <th>
+            Total @Html.DisplayNameFor(model => model.Product.Price)
+        </th>
+        <td><b>Action</b></td>
+
+    </tr>
+    @{ double Total = 0; double TotalPrice = 0;}
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Price)
+                @{ Total += (item.Product.Price * item.quantity);}
+            </td>
+            <td>
+                @{ TotalPrice = (item.Product.Price * item.quantity);}@TotalPrice
+            </td>
+            <td>@Html.ActionLink("Remove Item", "Delete", new { cartId = item.Id })</td>
+        </tr>
+    }
+</table>
+<p style="text-align :center"><strong>Total Cost = @Total</strong></p>
+<div>
+    @Html.ActionLink("Add More Products", "AddToCart")
+
+    <div>@Html.ActionLink("Generate Order and Pay", "GenerateOrder", "Order")</div>
+
+</div>
+
